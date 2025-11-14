@@ -137,7 +137,6 @@ while running:
     '''
 
     # Update display and tick clock
-
     '''
     1. Now we update the display by calling pygame.display's update function passing in no arguments.
 
