@@ -1,0 +1,205 @@
+import pygame, random
+
+# Initialize pygame
+pygame.init()
+
+# Set display window
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 600
+size = (WINDOW_WIDTH, WINDOW_HEIGHT)
+display_surface = pygame.display.set_mode(size)
+pygame.display.set_caption("~~SNEKE~~")
+
+# Set FSP and clock
+
+FPS = 20
+
+clock = pygame.time.Clock()
+
+# Set game values
+
+snake_size = 20
+
+head_x = WINDOW_WIDTH // 2
+
+head_y = WINDOW_HEIGHT // 2
+
+
+snake_dx = 0
+
+snakey_dy = 0
+
+
+score = 0 
+
+# Set colors
+GREEN = (0, 255, 0)  # (r, g, b)
+]
+darkgreen = (10, 50, 10)
+red = (255, 0, 0)
+DARKRED = (150, 0, 0)
+
+white = (255, 255, 255)
+
+# Set fonts
+font = pygame.font.SysFont('gabriola', 48)
+
+# Set text
+title_text = font.render("~~Snake~~", True, GREEN, DARKRED)  # make a text object
+title_rect = title_text.get_rect()  # gets the box containing the text object
+title_rect.center = (WINDOW_WIDTH // 2,
+                     WINDOW_HEIGHT // 2)  # places the box containing the text object's center to the middle of the screen.
+
+#
+score_text = font.render(f"Score: {score}", True, GREEN, DARKRED)
+
+score_rect = score_text.get_rect()
+
+score_rect.topleft = (10, 10)
+
+
+game_over_text = font.render("GAMEOVER", True, RED, DARKRED)
+
+game_over_rect = game_over_text.get_rect()
+
+game_over_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+
+
+contine_text = font.render("Press any key to play again", True, RED, DARKGREEN)
+
+contine_rect = contine_text.get_rect()
+
+contine_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 64)
+
+# Set sounds and music
+pick_up_sound = pygame.mixer.Sound("pickup_sound.wav")
+
+# Set images (in this case, use simple rects...so just create their coordinates)
+# For a rectangle you need (top-left x, top-left y, width, height)
+apple_coord = (500, 500, SNAKE_SIZE, SNAKE_SIZE)
+apple_rect = pygame.draw.rect(display_surface, RED, apple_coord)
+
+
+head_coord = (head_x, head_y, SNAKE_SIZE, SNAKE_SIZE)
+
+apple_rect = pygame.draw.rect(display_surface, GREEN, apple_coord)
+
+body_coords = []
+
+# The main game loop
+running = True
+while running:
+    # Check to see if the user wants to quit
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+        # Move the snake
+      
+        event.key is pygame.K_RETURN
+        # Inside the block of the if statement where we checked if the eventy type is KEYDOWN
+   
+        event.key is pygame.K_LEFT
+        # Inside the block of the K_LEFT if statement
+   
+        snake_size = 20
+   
+        snakey_dy = 0
+     
+        if event.key is pygame.K_RIGHT:
+        # Inside the block of the K_RIGHT if statement.
+
+        snake_dx = SNAKE_SIZE
+        
+        snake_dy = 0
+    
+        event.key is pygame.K_UP
+        # Inside the block of the K_UP if statement.
+
+        snake.dy = -1 * SNAKE_SIZE
+
+        snakey_dy = 0
+  
+        event.key is pygame.K_DOWN
+        # Inside the block of the K_DOWN if statement.
+    
+        snake_dx = 0
+      
+        snake_dx = snake_size
+
+    # Add the head coordinate to the first index of the body coordinate list
+    # This will essentially move all the snakes body by one position in the list
+    
+    call body_coords.insert(0, head_coord)
+ 
+    call body_coords.pop()
+
+    # Update the x,y position of the snakes head and make a new coordinate
+
+    head_x += snake_dx
+
+    head_y += snake_dy
+    
+    head_coord = (head_x, head_y, SNAKE_SIZE, SNAKE_SIZE)
+
+    # Check for game over
+
+    # Check for collisions
+
+    # Update HUD
+ 
+    score_text = font.render(f"Score: {score}", True, GREEN, DARKRED)
+
+    
+
+    # Fill the surface
+ 
+    ''' 
+    The display_surface has a function we can use called fill, which takes one color argument.  
+    The act of using display_surface's fill is said as
+    "Call display_surface's fill function and pass WHITE in as it's argument."
+    It looks like this:  
+    1. display_surface.fill(WHITE)
+    '''
+
+    # Blit HUD
+  
+    Blitting means copying an image from it's source (the code) to it's destination (the display) 
+    This is necessary after updating the source (score changes, snake, and apple change etc.)
+    1. "Call display_surface's blit function.  It takes 2 arguments, text and rect surrounding that text.  
+    Pass in title_text and title_rect to blit the title to the screen
+    2. repeat for a new call to display_surface's blit function passing in score_text and score_rect.  
+    "We've just told the title and score to display.  
+    '''
+
+    # TODO: Read below.  3 TODO's, require's explanation
+    '''
+    1. for every body in body_coords do the following
+    call pygame.draw.rect and pass in display_surface, DARKGREEN, and body
+    2. assign to head_rect the results from calling pygame.draw.rect passing in display_surface, GREEN, and head_coord.
+    3. assign to apple_rect the results from calling pygame.draw.rect passing in display_surface, RED, and apple_coord  
+    '''
+
+    # Blit assets
+    # TODO: Read below.  2 TODO's, require's explanation
+    '''
+    Calling pygame.draw.rect is a way to blit rectangles.  
+    The blit function for display_surface is for direct blitting.  
+    2 ways to do similar things.  Update the display
+    1. "Call pygame.draw.rect and passing in display_surface, GREEN, and head_coord for the head of the snake
+    2. "Call pygame.draw.rct again pass in display_surface, RED, and apple_coord for the apple.  
+    '''
+
+    # Update display and tick clock
+    # TODO: Read below. 2 TODO's, require's explanation
+    '''
+    1. Now we update the display by calling pygame.display's update function passing in no arguments.
+
+    2. The while loop we are in is super fast.  We actually need to slow it down to our FPS of 20 seconds.  
+    That's what our clock variable will do for us.  What until 20 frames have passed every second.  Then continue.  
+    This is ticking the clock.   
+    to tick the clock call the clock object's tick function passing in FPS
+    '''
+
+# End the game
+pygame.quit()
